@@ -36,6 +36,19 @@ class AuctionsController < ApplicationController
   end
   
   def edit
+  	@auction = Auction.find(params[:id])
+  end
+  
+  def update
+  	@auction = Auction.find(params[:id])
+  	
+  	respond_to do |format|
+  		if @auction.update_attributes(params[:auction])
+  			format.html { redirect_to @auction, :notice => 'Sale was successfully updated.' }
+  		else
+  			format.html { render :action => 'edit' }
+  		end
+  	end
   end
   
   def destroy

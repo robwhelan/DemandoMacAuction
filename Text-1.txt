@@ -110,11 +110,13 @@ to do:
     	'le creuset blue'
     	'star wars lego'
     only show active auctions
-    add 'add to cart' form pointing to paypal 
+    DONE add 'add to cart' form pointing to paypal 
     when destroying an auction, a seller should be redirected to the auction index
     modify Bids#index to grab photos and titles, etc from Auction model
     a counter lists how many bids have been made so far.
     design a homepage
+    sort and organize sales by store
+    be able to view the list of stores using Demando; get address & contact info
 
 balanced implementation
 	remove default from DelayedBuyer unlock time (the time is set in the Bid model when locking buyers)
@@ -133,6 +135,28 @@ polishing
 	limit number of text lines in the auction title and the product_searches title
 	pluralize "showing x result[s]" for auctions#index
 	
+deployment
+	design home page: remove sidebar, have carousel of charleston-y photos and big search bar
+	merchant signup form should be really clean
+	change link color on sidebar, and on auction index, and on productsearches#show
+	after an auction is created, it should look good (auctions#show) - include photo
+	DONE include optional "pct off" in auction form; show it in both auctions index and the modal 
+	server side validations
+		user sign up form must make "user name" required
+	show the seller in the modal
+	provide step by step How It Works link for sellers
+	DONE shopping cart should include info on who is selling it
+	buyers' instructions on picking up merchandise
+	nav bar dropdown menu
+		hello, buyer a:
+			--> my account, my sale,s my bids, etc; logout
+		how it works
+			--> for sellers, for buyers
+    focus into buy-now-price on auctions#form
+    heroku
+    	push final app to git
+    	push to heroku
+    	rake db:migrate
     
 competition:
     Grays Online

@@ -3,27 +3,25 @@
 
 <div class="row">
 <div class="span7">
-  <%= f.text_field :image, :value => params[:image], :type => 'hidden' %>
 
   <div class="control-group">
     <%= f.label :title, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :title, :class => 'text_field span4', :value => params[:title] %>
+      <%= f.text_field :title, :class => 'text_field span4' %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :brand, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :brand, :class => 'text_field span4', :value => params[:brand] %>
+      <%= f.text_field :brand, :class => 'text_field span4' %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label "Description - include great keywords for shoppers!", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area 	:description, :class => 'text_field span4', :rows => 6, 
-      					:value => params[:description] %>
+      <%= f.text_area 	:description, :class => 'text_field span4', :rows => 6 %>
     </div>
   </div>
 
@@ -91,7 +89,7 @@
 </div> <!-- end span7 -->
 
 <div class="span3">
-	<img src="<%=params[:image]%>" class="img-polaroid" />
+	<img src="<%=@auction.image %>" class="img-polaroid" />
 </div> <!-- end span3 -->
 
 </div> <!-- end row -->

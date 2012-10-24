@@ -1,5 +1,5 @@
 class Auction < ActiveRecord::Base
-  attr_accessible :brand, :buy_now_price, :category, :color, :condition, :description, :image, :lowest_accepted_price, :title, :size, :user_id, :quantity, :active
+  attr_accessible :brand, :buy_now_price, :category, :color, :condition, :description, :image, :lowest_accepted_price, :title, :size, :user_id, :quantity, :active, :percent_off
 
   has_many :bids
   belongs_to :user

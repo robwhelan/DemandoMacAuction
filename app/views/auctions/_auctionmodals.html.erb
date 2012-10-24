@@ -1,0 +1,43 @@
+<% @auctions.each do |auction| %>
+
+	<% auctionmodal = "auctionModal" + auction.id.to_s %>
+
+	<div class="modal hide fade" id="<%= auctionmodal %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    		<h3 id="myModalLabel"><%= auction.title %></h3>
+  		</div>
+  		<div class="modal-body">
+			<img src=<%=auction.image %> width="300" style="margin-left: 20px;" />
+    		<p><%= auction.description %></p>
+    		<p><strong>Sold by</strong> <%= auction.user.user_name %></p>
+  		</div>
+	  	<div class="modal-footer">
+	  		<% if auction.percent_off %>
+	  			<h4 class="pull-left"><%= auction.percent_off %>% off</h4>
+	  		<% end %>
+   			<form name="_xclick" target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display: inline;">
+    			<input type="hidden" name="cmd" value="_cart">
+   				<input type="hidden" name="business" value="rob.whelan@deman.do">
+    			<input type="hidden" name="currency_code" value="USD">
+    			<input type="hidden" name="item_name" value="<%= auction.title %>">
+    			<input type="hidden" name="item_number" value="<%= auction.id %> sold by <%= auction.user.user_name %>">
+    			<input type="hidden" name="amount" value=<%= auction.buy_now_price %>>
+    			<input type="hidden" name="shipping" value=0>
+				<input type="submit" value="Add to Cart" name="submit" class="btn btn-primary" >
+    			<input type="hidden" name="add" value="1">
+    		</form>
+			<!-- <button class="btn muted">Make a Bid</button> -->
+			<% if can? :update, auction %>
+				<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              					edit_auction_path(auction), :class => 'btn' %>
+              	<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+					            auction_path(auction), :method => 'delete', 
+					            :confirm => t('.confirm', :default => t("helpers.links.confirm", 
+					            			:default => 'Are you sure?')), :class => 'btn btn-danger' %>
+            <% end %>
+			<button class="btn" data-dismiss="modal" data-target="#auctionModal" aria-hidden="true">Close</button>
+  		</div>
+	</div>    
+
+<% end %>

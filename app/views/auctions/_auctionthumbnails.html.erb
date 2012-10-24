@@ -1,0 +1,12 @@
+<% @auctions.each do |auction| %>
+<% auctionmodal = "#auctionModal" + auction.id.to_s %>
+	<li class="span2">
+		<a href="<%= auctionmodal %>" data-toggle="modal">
+			<div class="thumbnail">
+				<img src=<%=auction.image%> alt="" height="200" />
+				<h5><%=auction.title %></h5>
+				<p>$<%=auction.buy_now_price %></p>
+			</div>
+		</a>
+	</li>
+<% end %>	
