@@ -13,10 +13,10 @@ DemandoAuction::Application.routes.draw do
   root :to => "pages#home"
 
   get "pages/home"
-
   get "pages/about"
-
   get "pages/faq"
+  get "pages/how_it_works_sellers"
+  get "pages/how_it_works_buyers"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

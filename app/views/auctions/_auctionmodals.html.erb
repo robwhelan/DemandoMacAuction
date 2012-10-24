@@ -10,12 +10,35 @@
   		<div class="modal-body">
 			<img src=<%=auction.image %> width="300" style="margin-left: 20px;" />
     		<p><%= auction.description %></p>
-    		<p><strong>Sold by</strong> <%= auction.user.user_name %></p>
+    		<p><strong>Offered by</strong> <%= auction.user.user_name %></p>
+    		
+    		<% unless auction.brand.size == 0 %>
+    			<p><strong>Brand:</strong> <%= auction.brand %></p>
+			<% end %>
+
+    		<% unless auction.size.size == 0 %>
+    			<p><strong>Size:</strong> <%= auction.size %></p>
+			<% end %>
+			
+    		<% unless auction.color.size == 0 %>
+    			<p><strong>Color:</strong> <%= auction.color %></p>
+			<% end %>
+			
+    		<% unless auction.condition.size == 0 %>
+    			<p><strong>Condition:</strong> <%= auction.condition %></p>
+			<% end %>
+			
+    		<% if auction.quantity %>
+    			<p><strong><%= auction.quantity %> available</strong> </p>
+			<% end %>
+			
   		</div>
 	  	<div class="modal-footer">
-	  		<% if auction.percent_off %>
-	  			<h4 class="pull-left"><%= auction.percent_off %>% off</h4>
-	  		<% end %>
+	  		<h4 class="pull-left">$<%= auction.buy_now_price %>
+	  			<% if auction.percent_off %>
+	  				(<%= auction.percent_off %>% off)
+	  			<% end %>
+	  		</h4>
    			<form name="_xclick" target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display: inline;">
     			<input type="hidden" name="cmd" value="_cart">
    				<input type="hidden" name="business" value="rob.whelan@deman.do">

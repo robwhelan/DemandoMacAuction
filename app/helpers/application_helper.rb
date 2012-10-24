@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def title
-    base_title = "Demando"
+    base_title = "Demando | Charleston's Online Sale Rack"
     if @title.nil?
       base_title
     else

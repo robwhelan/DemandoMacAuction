@@ -30,12 +30,13 @@
           </a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <%= link_to mini_logo, root_path, :class => "brand" %>
+              <li><%= link_to mini_logo, root_path, :class => "brand" %></li>
               <%= render 'devise/menu/registration_items' %>
               <%= render 'devise/menu/login_items' %>
               <% if user_signed_in? %>
                 <%= render 'shared/user_options' %>
               <% end %>
+              <%= render 'shared/demando_info_menu' %>
             </ul>
             <ul class="nav pull-right">
             <% if user_signed_in? and current_user.role == "seller" and params[:controller] != 'devise/registrations' %>
@@ -52,23 +53,29 @@
 
     <div class="container">
       <div class="content">
-        <div class="row">
-            <div class="span2">
-              <div class="well sidebar-nav">
-                <h3>Categories</h3>
-                <ul class="nav nav-list">
-                	<li><%= link_to "All", auctions_path %></li>
-					<li class="divider"></li>
-					<% product_category.each do |cat| %>
-					<li><%= link_to "#{cat.to_s.humanize}", auctions_path(:category => cat) %></li>
-					<% end %>
-                </ul>
-              </div><!--/.well -->
-            </div><!--/span-->
-           <div class="span10">
-              <%= yield %> 
-           </div>
-        </div><!--/row-->
+      	<% if params[:controller] == 'pages' and params[:action] == 'home' %>
+      		<%= render 'shared/home_page_layout' %>
+      	<% else %>
+	        <div class="row">
+    	        <div class="span2">
+        	      <div class="well sidebar-nav">
+            	    <h3>Categories</h3>
+                	<ul class="nav nav-list">
+	                	<li><%= link_to "All", auctions_path %></li>
+						<li class="divider"></li>
+						<% product_category.each do |cat| %>
+							<li><%= link_to "#{cat.to_s.humanize}", auctions_path(:category => cat) %></li>
+						<% end %>
+                	</ul>
+	              </div><!--/.well -->
+    	        </div><!--/span2-->
+	    	    <div class="span10">
+    	    	    <%= yield %> 
+				</div> <!-- end span 10 -->
+			</div><!--/row-->
+
+		<% end %>
+
       </div><!--/content-->
 
       <footer>

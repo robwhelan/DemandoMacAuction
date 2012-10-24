@@ -5,10 +5,12 @@ create an auction:
     DONE EXCEPT CATEGORY after the seller clicks on the image, certain fields are filled in on the 'new auction' form, such as: image, product title, and description
     DONE the seller enters the 'buy now' price and a minimum-accepted price
     DONE the seller presses "submit" and the auction has begun.
+	the product searches engine also searches google images for more material
 
 DEVISE plan
     DONE user with seller, buyer, and admin boolean attributes; not necessary to have a user account to buy stuff; necessary to place a bid though.
     set up mail server (localhost DONE)
+    user signup: need form elements to appear and disappear based on role selection
     DONE before_filter on creating bids for user
 
 CANCAN plan
@@ -39,12 +41,8 @@ Transaction Model
 
 bid on auction:
     DONE a shopper signs in and views an index of auctions.
-    
     DONE he finds a products he wants and clicks it for a closer view.
-    
-    DONE he makes an offer on the product
-    or he buys it for the "buy now" price.
-    
+    he makes an offer on the product
     DONE if he makes a bid, the bid is compared to the 'lowest accept' price.
         DONE (after_save bids#create, compare_bid_to_lowest_accept method(bid, lowest_accept) )
         if the bid is > or = to lowest accept price, the bid wins and a transaction is created.
@@ -61,19 +59,17 @@ bid on auction:
                 authorization: if buyer_delayed_from_auction?
                     user cannot [:create, :update] Bid, where(auction id => auction_id)
     
-    DONE the user can look at his existing offers
+    the user can look at his existing offers
     the user can look at his list of accepted offers.
         ** will need to add a status string to the bid
 
-    a shopper can search for products or navigate existing categories
-        * need to add a "primary category" attribute for user model
-        * need to add a list of categories for sellers to select when they register
+    DONE a shopper can search for products or navigate existing categories
+	DONE need to add a "primary category" attribute for user model
+	DONE need to add a list of categories for sellers to select when they register
         
 successful offer:
     the user is notified he has won the auction.
-    
     the user pays Demando via paypal
-    
     a transaction id is created notifying both Demando and the user:
         * next steps (go pick up item, show the retailers the transaction ID)
         * the transaction DI
@@ -81,7 +77,6 @@ successful offer:
         * directions to the retailer, contact info, and hours
         
     if there was only one product availalbe, the the number available goes to 0 and status goes to "pending pickup"
-    
     if there were more than 1 available, the number available decreases by one
     
 to do:
@@ -109,6 +104,8 @@ to do:
     	'wilton cake decorating tips'
     	'le creuset blue'
     	'star wars lego'
+    	'towel rack'
+    able to sort sales by price, by highest % off
     only show active auctions
     DONE add 'add to cart' form pointing to paypal 
     when destroying an auction, a seller should be redirected to the auction index
@@ -122,7 +119,7 @@ balanced implementation
 	remove default from DelayedBuyer unlock time (the time is set in the Bid model when locking buyers)
     ipmlement balanced
     WHEN IMPLEMENTING BALANCED will need to also grab ip_address and maybe a cart_id if they are buying multiple things.
-        ip_address :string
+        ip_address :string (user.current_sign_in_ip)
         cart_id :integer.
         first_name :string
         last_name
@@ -136,27 +133,26 @@ polishing
 	pluralize "showing x result[s]" for auctions#index
 	
 deployment
-	design home page: remove sidebar, have carousel of charleston-y photos and big search bar
-	merchant signup form should be really clean
-	change link color on sidebar, and on auction index, and on productsearches#show
-	after an auction is created, it should look good (auctions#show) - include photo
+	DONE all available info should be available in the modal
 	DONE include optional "pct off" in auction form; show it in both auctions index and the modal 
+	DONE show the seller in the modal
+	DONE shopping cart should include info on who is selling it
+	DONE nav bar dropdown menu
+	DONE after an auction is created, it should look good (auctions#show) - include photo
+	DONE merchant signup form should be really clean
+	DONE change link color on sidebar, and on auction index, and on productsearches#show
+	design home page: remove sidebar, have carousel of charleston-y photos and big search bar
 	server side validations
 		user sign up form must make "user name" required
-	show the seller in the modal
 	provide step by step How It Works link for sellers
-	DONE shopping cart should include info on who is selling it
 	buyers' instructions on picking up merchandise
-	nav bar dropdown menu
-		hello, buyer a:
-			--> my account, my sale,s my bids, etc; logout
-		how it works
-			--> for sellers, for buyers
     focus into buy-now-price on auctions#form
     heroku
     	push final app to git
     	push to heroku
-    	rake db:migrate
+    	DONE rake db:migrate
+    	point www.deman.do to herokuapp (add domain to heroku?)
+    	remove signup and naked domain redirects
     
 competition:
     Grays Online
