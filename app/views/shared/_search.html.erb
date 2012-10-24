@@ -1,0 +1,6 @@
+<%= form_for @product_search, :url => { :action => 'create' } do |f| %>
+
+  <%= f.text_field 'keywords' %>
+  <%= f.submit 'submit' %>
+  
+<% end %>

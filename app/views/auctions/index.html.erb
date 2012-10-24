@@ -1,0 +1,56 @@
+<%- model_class = Auction.new.class -%>
+<% if params[:category] %>
+		<h1><%= params[:category].to_s.humanize %></h1>
+	<% elsif params[:q] %>
+		<h1><%= @auctions.count %> results for "<%= params[:q] %>"</h1>
+	<% elsif params[:auction_owner] %>
+		<h1>My sales</h1>
+	<% else %>
+		<h1>All Sales</h1>
+	<% end %>
+
+	<ul class="thumbnails">
+	    <% @auctions.each do |auction| %>
+		<% auctionmodal = "#auctionModal" + auction.id.to_s %>
+			<li class="span2">
+				<a href="<%= auctionmodal %>" data-toggle="modal">
+					<div class="thumbnail">
+						<img src=<%=auction.image%> alt="" height="200" />
+						<h5><%=auction.title %></h5>
+						<p>$<%=auction.buy_now_price %></p>
+					</div>
+				</a>
+			</li>
+		<% end %>	
+	</ul>
+	
+<% @auctions.each do |auction| %>
+<% auctionmodal = "auctionModal" + auction.id.to_s %>
+	<div class="modal hide fade" id="<%= auctionmodal %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-header">
+    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    	<h3 id="myModalLabel"><%= auction.title %></h3>
+  	</div>
+  	<div class="modal-body">
+		<img src=<%=auction.image %> width="300" style="margin-left: 20px;" />
+    	<p><%= auction.description %></p>
+  	</div>
+  	<div class="modal-footer">
+    <form name="_xclick" target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="business" value="rob.whelan@deman.do">
+    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="item_name" value="<%= auction.title %>">
+    <input type="hidden" name="item_number" value=<%= auction.id %> >
+    <input type="hidden" name="amount" value=<%= auction.buy_now_price %>>
+    <input type="hidden" name="shipping" value=0>
+	<input type="submit" value="Add to Cart" name="submit" class="btn btn-primary" >
+    <input type="hidden" name="add" value="1">
+    </form>
+
+    <!-- <button class="btn" data-dismiss="modal" data-target="#auctionModal" aria-hidden="true">Close</button> -->
+
+
+  	</div>
+	</div>
+<% end %>

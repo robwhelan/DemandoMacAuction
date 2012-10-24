@@ -1,0 +1,19 @@
+  <li>
+    <%= link_to "All Sales", auctions_path %>
+  </li>
+<% if current_user.role == "buyer" %>
+  <li>
+    <%= link_to "My Bids", bids_path %>
+  </li>
+<% elsif current_user.role == "seller" %>
+  <li>
+    <%= link_to "My Sales", auctions_path(:auction_owner => current_user.id) %>
+  </li>
+<% elsif current_user.role == "admin" %>
+  <li>
+    <%= link_to "All Sales", auctions_path %>
+  </li>
+  <li>
+    <%= link_to "All Bids", bids_path %>
+  </li>
+<% end %>

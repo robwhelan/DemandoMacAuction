@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  brand: MyString
+  image: MyString
+  category: MyString
+  color: MyString
+  condition: MyString
+  value: 1.5
+  users: 
+  auctions: 
+  bids: 
+  seller_id: 1
+  buyer_id: 1
+
+two:
+  title: MyString
+  brand: MyString
+  image: MyString
+  category: MyString
+  color: MyString
+  condition: MyString
+  value: 1.5
+  users: 
+  auctions: 
+  bids: 
+  seller_id: 1
+  buyer_id: 1

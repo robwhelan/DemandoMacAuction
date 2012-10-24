@@ -1,0 +1,84 @@
+
+<%= form_for @auction, :html => { :class => 'form-horizontal' } do |f| %>
+<div class="progress progress-striped active">
+  <div class="bar" style="width: 66%;"></div>
+</div>
+
+  <%= f.text_field :image, :value => params[:image], :type => 'hidden' %>
+
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'text_field', :value => params[:title] %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :brand, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :brand, :class => 'text_field', :value => params[:brand] %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'text_field', :value => params[:description] %>
+    </div>
+  </div>
+
+  <div class="control-group">
+  	<%= f.label :category, :class => 'control-label' %>
+  	<div class="controls">
+  <%= f.collection_select :category, 
+  				%w[appliances arts,_crafts,_and_sewing automotive beauty baby books cell_phones_and_Accessories
+  					clothing_and_accessories collectibles electronics gift_cards grocery health
+  					home_and_kitchen jewelry music office_products lawn_and_garden pets shoes 
+  					sports_and_outdoors tools_and_home_improvement toys_and_games video_games watches],
+  				:to_s, :humanize, :value => current_user.category %>
+  	</div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :size, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :size, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :color, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :color, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :condition, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :condition, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :buy_now_price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :buy_now_price, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :lowest_accepted_price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lowest_accepted_price, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :quantity, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :quantity, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                auctions_path, :class => 'btn' %>
+  </div>
+<% end %>

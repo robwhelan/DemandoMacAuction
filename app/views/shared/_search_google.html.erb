@@ -1,0 +1,7 @@
+<%= form_for @product_search, :url => { :controller => 'product_searches', :action => 'create' }, 
+							  :html => { :class => 'navbar-form pull-right', :style => 'margin-top: 5px;' } do |f| %>
+
+  <%= f.text_field 'keywords', :class => 'input-medium search-query' %>
+  <%= f.submit 'Start a new auction', :class => 'btn' %>
+  
+<% end %>

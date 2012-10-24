@@ -1,0 +1,8 @@
+<%- model_class = @auction.class -%>
+<div class="progress progress-striped active">
+  <div class="bar" style="width: 66%;"></div>
+</div>
+
+<h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+                               :default => "New #{model_class.model_name.human}") %></h1>
+<%= render :partial => 'form' %>

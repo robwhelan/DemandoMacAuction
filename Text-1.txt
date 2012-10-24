@@ -1,0 +1,139 @@
+create an auction:
+    DONE a retailer will start a new auction by searching for a product done
+    DONE the returned images will guide the seller to find the precise product they want to sell
+    DONE the seller will click on the image to start a new auction
+    DONE EXCEPT CATEGORY after the seller clicks on the image, certain fields are filled in on the 'new auction' form, such as: image, product title, and description
+    DONE the seller enters the 'buy now' price and a minimum-accepted price
+    DONE the seller presses "submit" and the auction has begun.
+
+DEVISE plan
+    DONE user with seller, buyer, and admin boolean attributes; not necessary to have a user account to buy stuff; necessary to place a bid though.
+    set up mail server (localhost DONE)
+    DONE before_filter on creating bids for user
+
+CANCAN plan
+    ALMOST DONE - check options hash letting the seller only see bids on his auctions; seller: can manage auction (create update destroy); can read all acutions; can only read bids associated with his auctions; 
+    DONE buyer: can only read an auction; can CRUD a bid belonging to himself; cannot CRUD bids not belonging to him
+    DONE admin: can manage bids and auctions
+
+Active Record relationship plan
+    DONE bids belong to auctions, belong to users
+    DONE auctions have many bids
+    DONE users have many auctions
+    DONE users have many bids
+    DONE (need to add :quantity, :integer to auctions model)
+    DONE (need to add :active, :boolean, :default => true)
+    DONE need to create a Bid model belonging to Auction and User; need to add_index in the migration
+    DONE when auctions are created, they must be associated with a user
+    DONE when bids are created, they must be associated directly with an auction (and user_id must be filled in)
+    DONE when transactions are created, they must be associated directly with a bid (user_id, uaction_id must be filled in)
+
+Transaction Model
+    DONE belongs to :bid, :auction
+    DONE Bid has one transaction
+    DONE    a transaction is created if a bid wins.
+    DONE the transaction needs to access the seller, buyer, auction details, and bid value.
+    after a transaction is created, emails get sent out and the auction "active" goes to "false"
+    DONE indices: seller_id, buyer_id, auction_id, bid_id, 
+    NO nested routes under :user
+
+bid on auction:
+    DONE a shopper signs in and views an index of auctions.
+    
+    DONE he finds a products he wants and clicks it for a closer view.
+    
+    DONE he makes an offer on the product
+    or he buys it for the "buy now" price.
+    
+    DONE if he makes a bid, the bid is compared to the 'lowest accept' price.
+        DONE (after_save bids#create, compare_bid_to_lowest_accept method(bid, lowest_accept) )
+        if the bid is > or = to lowest accept price, the bid wins and a transaction is created.
+        DONE if not, a delay lock is created;
+            then the user has hte option to buy now at the list price or to wait one hour before the next offer.
+            DONE DelayedBuyer model
+                DONE * belongs_to auction, user
+                DONE * columns: auction_id (index), user_id (index), unlock_time
+                * if time.now < unlock_time, user cannot :create, :update Bid, auction id => auction_id
+                
+                method: buyer_delayed_from_auction(user_id, auction id)
+                    time.now < unlock_time,
+                
+                authorization: if buyer_delayed_from_auction?
+                    user cannot [:create, :update] Bid, where(auction id => auction_id)
+    
+    DONE the user can look at his existing offers
+    the user can look at his list of accepted offers.
+        ** will need to add a status string to the bid
+
+    a shopper can search for products or navigate existing categories
+        * need to add a "primary category" attribute for user model
+        * need to add a list of categories for sellers to select when they register
+        
+successful offer:
+    the user is notified he has won the auction.
+    
+    the user pays Demando via paypal
+    
+    a transaction id is created notifying both Demando and the user:
+        * next steps (go pick up item, show the retailers the transaction ID)
+        * the transaction DI
+        * a photo of the product
+        * directions to the retailer, contact info, and hours
+        
+    if there was only one product availalbe, the the number available goes to 0 and status goes to "pending pickup"
+    
+    if there were more than 1 available, the number available decreases by one
+    
+to do:
+    DONE preloading instances on nested resources
+    DONE beforefilters for abilities and loading resources (in controllers)
+    DONE twitter bootstrap formatting
+    DONE change datatypes on $ values from :float to :decimal
+    DONE change paypal form to point to rob.whelan@deman.do
+    DONE place padding below the navbar (after installing on mac)
+	DONE add a 'category' :string to user signup and have a dropdown that appears if they select 'seller' as role
+    DONE categories in fixed left-hand-sidebar should be amazon product categories with (#) products in each category
+	DONE after clicking a sale category, the auctions should be filtered to reveal products within that category
+    DONE fix the sidebar on the left with categories
+	DONE product searches - show ought to be a thumbnail, span 2 series of pictures with just image and title
+	DONE auctions#index are not stacking properly-- height must be fixed
+    DONE there need to be bread crumbs or categories in the left-hand-side content sidebar
+    server side validations for each model( auction: buy now price should be >= lowest accepted)
+	auction#show page must be better formatted to show all info, including photo
+    cancan abilities for Transactoin model
+    "destroy" mechanics in auction and bid controllers.
+    explore google api errors
+    	bad searches:
+    	'wilson cake decorating tips'
+    	'wilson cake decorating'
+    	'wilton cake decorating tips'
+    	'le creuset blue'
+    	'star wars lego'
+    only show active auctions
+    add 'add to cart' form pointing to paypal 
+    when destroying an auction, a seller should be redirected to the auction index
+    modify Bids#index to grab photos and titles, etc from Auction model
+    a counter lists how many bids have been made so far.
+    design a homepage
+
+balanced implementation
+	remove default from DelayedBuyer unlock time (the time is set in the Bid model when locking buyers)
+    ipmlement balanced
+    WHEN IMPLEMENTING BALANCED will need to also grab ip_address and maybe a cart_id if they are buying multiple things.
+        ip_address :string
+        cart_id :integer.
+        first_name :string
+        last_name
+        card_type :string
+        card_expires_on :date
+        billing_address stuf...
+    build card collection info into User form (balanced.js)
+
+polishing
+	limit number of text lines in the auction title and the product_searches title
+	pluralize "showing x result[s]" for auctions#index
+	
+    
+competition:
+    Grays Online
+    liquidation.com

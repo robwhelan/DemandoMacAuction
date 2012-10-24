@@ -1,0 +1,4 @@
+<%= form_tag({:controller => 'product_searches', :action => 'new' }, {:method => 'GET', :class => 'form-search', :style => 'margin-top: 5px;'}) do %>
+  <%= text_field_tag(:q, 'Search for a product', :class => 'input-medium search-query') %>
+  <a href="#"><i class="icon-search"></i></a>
+<% end %>

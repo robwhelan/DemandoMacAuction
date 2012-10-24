@@ -1,0 +1,4 @@
+<%= form_tag(auctions_path, {:method => 'GET', :class => 'navbar-form pull-right', :style => 'margin-top: 5px;'}) do %>
+  <%= text_field_tag(:q, nil, :class => 'input-medium search-query') %>
+  <%= submit_tag 'Search Sales', :class => 'btn' %>
+<% end %>
