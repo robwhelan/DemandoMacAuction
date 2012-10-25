@@ -142,6 +142,9 @@ deployment
 	DONE merchant signup form should be really clean
 	DONE change link color on sidebar, and on auction index, and on productsearches#show
 	DONE design home page: remove sidebar, have carousel of charleston-y photos and big search bar
+	figure out mail server - send emails upon signup
+	facebook auth?
+	better 404 failure messages
 	server side validations
 		user sign up form must make "user name" required
 	provide step by step How It Works link for sellers
@@ -151,9 +154,10 @@ deployment
     	DONE push final app to git
     	DONE push to heroku
     	DONE rake db:migrate
-    	point www.deman.do to herokuapp (add domain to heroku?)
-    	remove signup and naked domain redirects
+    	DONE point www.deman.do to herokuapp (add domain to heroku?)
+    	NOT DONE remove signup and naked domain redirects
     
 competition:
     Grays Online
     liquidation.com
+    
