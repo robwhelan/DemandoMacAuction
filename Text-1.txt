@@ -141,15 +141,15 @@ deployment
 	DONE after an auction is created, it should look good (auctions#show) - include photo
 	DONE merchant signup form should be really clean
 	DONE change link color on sidebar, and on auction index, and on productsearches#show
-	design home page: remove sidebar, have carousel of charleston-y photos and big search bar
+	DONE design home page: remove sidebar, have carousel of charleston-y photos and big search bar
 	server side validations
 		user sign up form must make "user name" required
 	provide step by step How It Works link for sellers
 	buyers' instructions on picking up merchandise
     focus into buy-now-price on auctions#form
     heroku
-    	push final app to git
-    	push to heroku
+    	DONE push final app to git
+    	DONE push to heroku
     	DONE rake db:migrate
     	point www.deman.do to herokuapp (add domain to heroku?)
     	remove signup and naked domain redirects
