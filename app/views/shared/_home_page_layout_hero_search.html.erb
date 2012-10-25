@@ -1,0 +1,10 @@
+<div class="hero-unit">
+  <h1>Charleston's online sale rack</h1>
+  <p>Charleston's local retailers are putting their sale racks online... what deals will you find?</p>
+
+<%= form_tag(auctions_path, {:method => 'GET', :class => 'navbar-form pull-left', :style => 'margin-top: 5px;'}) do %>
+  <%= text_field_tag(:q, nil, :class => 'input-large search-query') %>
+  <%= submit_tag 'Search Sales', :class => 'btn btn-primary' %>
+<% end %>
+
+</div>

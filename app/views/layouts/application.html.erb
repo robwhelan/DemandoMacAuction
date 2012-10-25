@@ -38,12 +38,13 @@
               <% end %>
               <%= render 'shared/demando_info_menu' %>
             </ul>
-            <ul class="nav pull-right">
+            <ul class="nav pull-right" style="margin-top: 14px;">
             <% if user_signed_in? and current_user.role == "seller" and params[:controller] != 'devise/registrations' %>
             	<% @product_search = ProductSearch.new %>
             	<%= render 'shared/search_google' %>
-            <% else %>
+            <% else unless params[:controller] == 'pages' and params[:action] == 'home' %>
                 <%= render 'shared/search_for_auctions' %>
+            <% end %>
             <% end %>
             </ul>
           </div><!--/.nav-collapse -->
@@ -54,7 +55,7 @@
     <div class="container">
       <div class="content">
       	<% if params[:controller] == 'pages' and params[:action] == 'home' %>
-      		<%= render 'shared/home_page_layout' %>
+      		<%= render 'shared/home_page_layout_hero_search' %>
       	<% else %>
 	        <div class="row">
     	        <div class="span2">
