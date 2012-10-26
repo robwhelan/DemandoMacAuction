@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024143353) do
+ActiveRecord::Schema.define(:version => 20121026193057) do
 
   create_table "auctions", :force => true do |t|
-    t.string   "description"
+    t.text     "description"
     t.string   "image"
     t.string   "category"
     t.string   "brand"
