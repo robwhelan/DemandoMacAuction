@@ -105,6 +105,7 @@ to do:
     	'le creuset blue'
     	'star wars lego'
     	'towel rack'
+    	'silly bands'
     able to sort sales by price, by highest % off
     only show active auctions
     DONE add 'add to cart' form pointing to paypal 
