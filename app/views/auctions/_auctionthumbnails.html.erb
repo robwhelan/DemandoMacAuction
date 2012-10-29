@@ -4,8 +4,11 @@
 		<a href="<%= auctionmodal %>" data-toggle="modal">
 			<div class="thumbnail">
 				<img src=<%=auction.image%> alt="" height="200" />
-				<p><%=auction.title %></p>
-				<p>$<%=auction.buy_now_price %></p>
+				<p><%=truncate(auction.title, :length => 45) %></p>
+				<p>$<%=auction.buy_now_price %>
+	  			<% if auction.percent_off %>
+	  				<strong> (<%= auction.percent_off %>% off)</strong></p>
+	  			<% end %>
 			</div>
 		</a>
 	</li>

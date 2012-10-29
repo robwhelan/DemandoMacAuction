@@ -113,6 +113,7 @@ to do:
     modify Bids#index to grab photos and titles, etc from Auction model
     a counter lists how many bids have been made so far.
     design a homepage
+    put pct off on index page next to price
     sort and organize sales by store
     be able to view the list of stores using Demando; get address & contact info
 
