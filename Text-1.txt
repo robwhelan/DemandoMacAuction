@@ -93,8 +93,10 @@ to do:
 	DONE product searches - show ought to be a thumbnail, span 2 series of pictures with just image and title
 	DONE auctions#index are not stacking properly-- height must be fixed
     DONE there need to be bread crumbs or categories in the left-hand-side content sidebar
+	DONE auction#show page must be better formatted to show all info, including photo
+    DONE design a homepage
+    DONE put pct off on index page next to price
     server side validations for each model( auction: buy now price should be >= lowest accepted)
-	auction#show page must be better formatted to show all info, including photo
     cancan abilities for Transactoin model
     "destroy" mechanics in auction and bid controllers.
     explore google api errors
@@ -112,8 +114,6 @@ to do:
     when destroying an auction, a seller should be redirected to the auction index
     modify Bids#index to grab photos and titles, etc from Auction model
     a counter lists how many bids have been made so far.
-    design a homepage
-    put pct off on index page next to price
     sort and organize sales by store
     be able to view the list of stores using Demando; get address & contact info
 
@@ -131,7 +131,7 @@ balanced implementation
     build card collection info into User form (balanced.js)
 
 polishing
-	limit number of text lines in the auction title and the product_searches title
+	DONE limit number of text lines in the auction title and the product_searches title
 	pluralize "showing x result[s]" for auctions#index
 	
 deployment
@@ -146,6 +146,7 @@ deployment
 	DONE design home page: remove sidebar, have carousel of charleston-y photos and big search bar
 	figure out mail server - send emails upon signup
 	facebook auth?
+	product search case sensitive?? should not be
 	better 404 failure messages
 	server side validations
 		user sign up form must make "user name" required

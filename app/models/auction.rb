@@ -6,6 +6,8 @@ class Auction < ActiveRecord::Base
   has_many :transactions
   has_many :delayed_buyers
   
+  validates_uniqueness_of :description, :case_sensitive => false
+  
   def self.filter(q, auction_owner, category)
     if category
       self.where(:category => category)
