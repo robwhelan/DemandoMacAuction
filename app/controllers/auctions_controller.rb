@@ -52,6 +52,13 @@ class AuctionsController < ApplicationController
   end
   
   def destroy
+  	@auction = Auction.find(params[:id])
+  	@auction.destroy
+  	
+  	respond_to do |format|
+  		format.html { redirect_to auctions_path }
+  		format.json { head :no_content }
+  	end
   end
 
   def attach_user
