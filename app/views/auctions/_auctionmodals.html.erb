@@ -50,7 +50,7 @@
 				<input type="submit" value="Add to Cart" name="submit" class="btn btn-primary" >
     			<input type="hidden" name="add" value="1">
     		</form>
-			<!-- <button class="btn muted">Make a Bid</button> -->
+			<%= link_to "Make a bid", pages_still_building_bids_path, :class => 'btn' %> 
 			<% if can? :update, auction %>
 				<%= link_to t('.edit', :default => t("helpers.links.edit")),
               					edit_auction_path(auction), :class => 'btn' %>

@@ -116,6 +116,10 @@ to do:
     a counter lists how many bids have been made so far.
     sort and organize sales by store
     be able to view the list of stores using Demando; get address & contact info
+    how it works menu: have an "about" selection
+    	* why its built
+    	* where based
+    	* contact
 
 balanced implementation
 	remove default from DelayedBuyer unlock time (the time is set in the Bid model when locking buyers)

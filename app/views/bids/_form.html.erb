@@ -1,22 +1,19 @@
-<%= form_for @bid, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @bid do |f| %>
+
+<h3 class="control-label"><%= @bid.auction.title %></h3><br />
+<img src=<%= @bid.auction.image %> width="250" class="img-polaroid" />
+
+
+
   <div class="control-group">
-    <%= f.label :value, :class => 'control-label' %>
+    <%= f.label "My bid ($)", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :value, :class => 'text_field' %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :auction_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :auction_id, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :user_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :user_id, :class => 'number_field' %>
-    </div>
-  </div>
+
+	<%= f.number_field :auction_id, :value => params[:auction_id], :type => 'hidden' %>
+	<%= f.number_field :user_id, :value => params[:user_id], :type => 'hidden' %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

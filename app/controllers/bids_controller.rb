@@ -18,7 +18,7 @@ class BidsController < ApplicationController
   end
 
   def create
-    @auction = Auction.find(params[:auction_id])
+    @auction = Auction.find(params[:bid][:auction_id])
     @bid = @auction.bids.new(params[:bid])
     
     respond_to do |format|

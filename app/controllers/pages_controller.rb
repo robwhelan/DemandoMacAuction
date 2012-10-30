@@ -16,5 +16,9 @@ class PagesController < ApplicationController
   def how_it_works_sellers
   	render 'how_it_works_sellers'
   end
+  
+  def still_building_bids
+  	render 'still_building_bids'
+  end
 
 end

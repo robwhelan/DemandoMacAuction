@@ -17,6 +17,7 @@ DemandoAuction::Application.routes.draw do
   get "pages/faq"
   get "pages/how_it_works_sellers"
   get "pages/how_it_works_buyers"
+  get "pages/still_building_bids"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
