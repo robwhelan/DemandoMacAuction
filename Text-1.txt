@@ -76,7 +76,7 @@ successful offer:
         * a photo of the product
         * directions to the retailer, contact info, and hours
         
-    if there was only one product availalbe, the the number available goes to 0 and status goes to "pending pickup"
+    if there was only one product availalbe, the the number available goes to 0 and status goes to ":active => false"
     if there were more than 1 available, the number available decreases by one
     
 to do:

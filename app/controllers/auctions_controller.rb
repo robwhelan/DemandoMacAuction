@@ -7,7 +7,7 @@ class AuctionsController < ApplicationController
   
   def index
     if params[:q] || params[:auction_owner] || params[:category]
-      @auctions = Auction.filter(params[:q], params[:auction_owner], params[:category]).all
+      @auctions = Auction.filter(params[:q], params[:auction_owner], params[:category]).where(:active => true)
     else
       @auctions = Auction.where(:active => true)
     end

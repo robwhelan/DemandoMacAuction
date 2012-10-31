@@ -10,11 +10,11 @@ class Auction < ActiveRecord::Base
   
   def self.filter(q, auction_owner, category)
     if category
-      self.where(:category => category and :active => true)
+      self.where(:category => category)
     elsif auction_owner
-      self.where(:user_id => auction_owner and :active => true)
+      self.where(:user_id => auction_owner)
     elsif q
-      self.where("description like ?", '%' + q + '%' and :active => true)    
+      self.where("description like ?", '%' + q + '%')    
     end
   end
 
