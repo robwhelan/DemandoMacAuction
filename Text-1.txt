@@ -1,3 +1,8 @@
+PRIORITIES
+1. Able to make a bid
+2. Process payment through Balanced
+3. Signup through FB
+
 create an auction:
     DONE a retailer will start a new auction by searching for a product done
     DONE the returned images will guide the seller to find the precise product they want to sell
@@ -9,9 +14,10 @@ create an auction:
 
 DEVISE plan
     DONE user with seller, buyer, and admin boolean attributes; not necessary to have a user account to buy stuff; necessary to place a bid though.
-    set up mail server (localhost DONE)
+    DONE set up mail server (localhost DONE)
     user signup: need form elements to appear and disappear based on role selection
     DONE before_filter on creating bids for user
+    DONE redirect back to current page after logging in
 
 CANCAN plan
     ALMOST DONE - check options hash letting the seller only see bids on his auctions; seller: can manage auction (create update destroy); can read all acutions; can only read bids associated with his auctions; 
@@ -66,6 +72,14 @@ bid on auction:
     DONE a shopper can search for products or navigate existing categories
 	DONE need to add a "primary category" attribute for user model
 	DONE need to add a list of categories for sellers to select when they register
+	
+	DONE if a user is not logged in when trying to make a bid, he is redirected to sign in
+	HARD user should be redirected, after signing in, back to the auction he wanted to bid on (or to auction/x/bids/new)
+	a user who is temporarily locked out of the auction, should be prevented from pressing the make bid button until unlocked
+	DONE a user who is temp. locked out of auction is redirected back to auctions with a notice
+	a user who submits a bid successfully should be redirected to the transactions#new form with everything filled in but payment into from balanced.js
+	maybe create a flag for the bid that says it won; then build a form for the order (or call it a transaction)
+	bids - only show winning bids, then click on new transaction, which brings you to order screen, which fills in balanced items
         
 successful offer:
     the user is notified he has won the auction.
@@ -152,8 +166,7 @@ deployment
 	facebook auth?
 	product search case sensitive?? should not be
 	better 404 failure messages
-	server side validations
-		user sign up form must make "user name" required
+	DONE server side validations
 	provide step by step How It Works link for sellers
 	buyers' instructions on picking up merchandise
     focus into buy-now-price on auctions#form
@@ -168,3 +181,9 @@ competition:
     Grays Online
     liquidation.com
     
+initial campaign
+	DONE modify sign up to say who referred you - add referral :string to user model, modify form; placehlder text "type your friend's name here"
+	DONE add fb share btn to application.html.erb
+	if there is no lowest accepted price ('nil') then assume it's equal to the list price
+	if a 
+	

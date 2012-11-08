@@ -51,6 +51,7 @@
     			<input type="hidden" name="add" value="1">
     		</form>
 			<%= link_to "Make a bid", pages_still_building_bids_path, :class => 'btn' %> 
+			<% link_to "Make a bid", new_auction_bid_path(auction), :class => 'btn' %>
 			<% if can? :update, auction %>
 				<%= link_to t('.edit', :default => t("helpers.links.edit")),
               					edit_auction_path(auction), :class => 'btn' %>

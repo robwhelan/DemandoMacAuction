@@ -21,4 +21,8 @@ class PagesController < ApplicationController
   	render 'still_building_bids'
   end
 
+  def promotions
+  	render 'promotions'
+  end
+
 end

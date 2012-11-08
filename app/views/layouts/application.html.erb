@@ -13,7 +13,20 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
-    <link href="images/favicon.ico" rel="shortcut icon">
+    <style type="text/css">
+    [name="marketplace_eid"] {
+        width: 300px;
+    }
+    [name^="expiration"] {
+        width: 50px;
+    }
+    [name="security_code"] {
+        width: 50px;
+    }
+    code { display: block; }
+    pre { color: green; }
+    </style>
+
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
@@ -34,6 +47,15 @@
 
   </head>
   <body>
+
+<div id="fb-root"></div>
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -67,6 +89,9 @@
       </div>
     </div>
 
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
     <div class="container">
       <div class="content">
       	<% if params[:controller] == 'pages' and params[:action] == 'home' %>
@@ -87,7 +112,12 @@
     	        </div><!--/span2-->
 	    	    <div class="span10">
     	    	    <%= yield %> 
+				
+				<div class="fb-like" id="fb-area" data-href="http://www.deman.do" data-send="false" data-width="450" data-show-faces="true" data-action="recommend"></div>
+
 				</div> <!-- end span 10 -->
+				
+				
 			</div><!--/row-->
 
 		<% end %>
@@ -104,6 +134,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+	<script type="text/javascript" src="https://js.balancedpayments.com/v1/balanced.js"></script>
 
 	<%= debug(params) if Rails.env.development? %>
   </body>

@@ -1,28 +1,101 @@
-<% form_for @transaction do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </p>
-  <p>
-    <%= f.label :card_type %><br />
-    <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
-  </p>
-  <p>
-    <%= f.label :card_number %><br />
-    <%= f.text_field :card_number %>
-  </p>
-  <p>
-    <%= f.label :card_verification, "Card Verification Value (CVV)" %><br />
-    <%= f.text_field :card_verification %>
-  </p>
-  <p>
-    <%= f.label :card_expires_on %><br />
-    <%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true %>
-  </p>
-  <p><%= f.submit "Submit" %></p>
+<%= form_for @transaction, :html => { :class => 'form-horizontal' } do |f| %>
+
+<%= f.text_field :title, 	:class => 'text_field', :value => @transaction.bid.auction.title, :type => 'hidden' %>
+<%= f.text_field :brand, 	:class => 'text_field', :value => @transaction.bid.auction.brand, :type => 'hidden' %>
+<%= f.text_field :image, 	:class => 'text_field', :value => @transaction.bid.auction.image, :type => 'hidden' %>
+<%= f.text_field :category, :class => 'text_field', :value => @transaction.bid.auction.category, :type => 'hidden' %>
+<%= f.text_field :color,	:class => 'text_field', :value => @transaction.bid.auction.color, :type => 'hidden' %>
+<%= f.text_field :condition, :class => 'text_field', :value => @transaction.bid.auction.condition, :type => 'hidden' %>
+<%= f.text_field :value, 	:class => 'text_field', :value => @transaction.bid.value, :type => 'hidden' %>
+
+<%= f.number_field :seller_id, 	:class => 'text_field', :value => @transaction.bid.auction.user_id, :type => 'hidden' %>
+<%= f.number_field :buyer_id, 	:class => 'text_field', :value => @transaction.bid.user_id, :type => 'hidden' %>
+<%= f.number_field :auction_id, :class => 'text_field', :value => @transaction.bid.auction.id, :type => 'hidden' %>
+<%= f.number_field :bid_id, :class => 'text_field', :value => @transaction.bid.id, :type => 'hidden' %>
+
+<img class='img-polaroid' width=200 src="<%=@transaction.bid.auction.image %>" />
+
+<div class="row">
+    <div class="span6">
+        <form id="payment">
+            <div>
+                <label>Card Number</label>
+                <input name="card_number" value="4111111111111111" autocomplete="off">
+            </div>
+            <div>
+                <label>Expiration</label>
+                <input name="expiration_month" value="1"> / <input name="expiration_year" value="2020">
+            </div>
+            <div>
+                <label>Security Code</label>
+                <input name="security_code" value="123" autocomplete="off">
+            </div>
+            <button>Submit Payment Data</button>
+        </form>
+    </div>
+</div>
+<div id="result"></div>
+<script type="text/javascript" src="https://js.balancedpayments.com/v1/balanced.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+    var marketplaceUri = http://www.deman.do;
+
+    var debug = function (tag, content) {
+        $('<' + tag + '>' + content + '</' + tag + '>').appendTo('#result');
+    };
+
+    try {
+        balanced.init(marketplaceUri);
+    } catch (e) {
+        debug('code', 'You need to set the marketplaceUri variable');
+    }
+
+    function balancedCallback(response) {
+        var tag = (response.status < 300) ? 'pre' : 'code';
+        debug(tag, JSON.stringify(response));
+        switch (response.status) {
+            case 201:
+                // response.data.uri == uri of the card resource, submit to your server
+            case 400:
+            case 403:
+                // missing/malformed data - check response.error for details
+                break;
+            case 402:
+                // we couldn't authorize the buyer's credit card - check response.error for details
+                break;
+            case 404:
+                // your marketplace URI is incorrect
+                break;
+            default:
+                // we did something unexpected - check response.error for details
+                break;
+        }
+    }
+
+    var tokenizeCard = function(e) {
+        e.preventDefault();
+
+        var $form = $('form#payment');
+        var cardData = {
+            card_number: $form.find('[name="card_number"]').val(),
+            expiration_month: $form.find('[name="expiration_month"]').val(),
+            expiration_year: $form.find('[name="expiration_year"]').val(),
+            security_code: $form.find('[name="security_code"]').val()
+        };
+
+        balanced.card.create(cardData, balancedCallback);
+    };
+
+    $('#payment').submit(tokenizeCard);
+
+    if (window.location.protocol === 'file:') {
+        alert("balanced.js does not work when included in pages served over file:// URLs. Try serving this page over a webserver. Contact support@balancedpayments.com if you need assistance.");
+    }
+</script>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                bid_transactions_path, :class => 'btn' %>
+  </div>
 <% end %>

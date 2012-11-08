@@ -19,6 +19,7 @@ class Ability
       cannot [:create, :update, :destroy], Auction
       can :create, Bid
       can [:read, :update, :destroy], Bid, :user_id => user.id
+      can :manage, Transaction
       #cannot :manage, Bid, :user_id != user.id
     end
 

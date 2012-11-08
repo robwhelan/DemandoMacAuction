@@ -5,9 +5,13 @@ DemandoAuction::Application.routes.draw do
   resources :product_searches
   resources :bids
   resources :transactions
-
+  
   resources :auctions do
     resources :bids
+  end
+  
+  resources :bids do
+  	resources :transactions
   end
       
   root :to => "pages#home"
@@ -18,6 +22,7 @@ DemandoAuction::Application.routes.draw do
   get "pages/how_it_works_sellers"
   get "pages/how_it_works_buyers"
   get "pages/still_building_bids"
+  get "pages/promotions"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

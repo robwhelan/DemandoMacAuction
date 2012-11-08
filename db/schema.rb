@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026193057) do
+ActiveRecord::Schema.define(:version => 20121106185843) do
 
   create_table "auctions", :force => true do |t|
     t.text     "description"
@@ -38,8 +38,9 @@ ActiveRecord::Schema.define(:version => 20121026193057) do
     t.decimal  "value"
     t.integer  "auction_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "is_winning", :default => false
   end
 
   add_index "bids", ["auction_id"], :name => "index_bids_on_auction_id"
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20121026193057) do
     t.string   "zip"
     t.string   "phone"
     t.string   "category"
+    t.string   "referral"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

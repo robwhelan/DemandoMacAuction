@@ -1,6 +1,17 @@
 <%= form_for @bid do |f| %>
 
-<h3 class="control-label"><%= @bid.auction.title %></h3><br />
+	<% if @bid.errors.any? %>
+		<div id="error_explanation">
+			<h3><%= pluralize(@bid.errors.count, "error") %> prevented this bid from being saved:</h3>
+			<ul><% @bid.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+<h3><%= @bid.auction.title %></h3>
+<h3>Listed for $<%= @bid.auction.buy_now_price %> (<%= @bid.auction.percent_off %>%)</h3>
 <img src=<%= @bid.auction.image %> width="250" class="img-polaroid" />
 
 
