@@ -8,6 +8,7 @@ gem 'cancan'
 gem 'activemerchant'
 gem 'balanced'
 gem 'actionmailer'
+gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'thin'
 
